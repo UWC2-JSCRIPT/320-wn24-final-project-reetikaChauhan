@@ -4,16 +4,11 @@ import AdminSignIn from './Components/AdminSignIn';
 import KitchenRegister from './Components/KitchenRegisterPage';
 import React, { useState,useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { collection, addDoc } from "firebase/firestore"; 
-import { doc, getDocs, query,where } from "firebase/firestore";
-import db from './db'
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import MenuDashboard from './Components/MenuDashboard';
-//import KitchenMenu from './Components/KitchenMenu';
-//import CustomerSignIn from './Components/CustomerSignIn';
-//import ShoppingCart from './Components/ShoppingCart';
+import KitchenMenu from './Components/KitchenMenu';
+import CustomerSignIn from './Components/CustomerSignIn';
+import ShoppingCart from './Components/ShoppingCart';
 
 function App() {
   const [kitchenuser, setKitchenUser] = useState({})
@@ -28,7 +23,10 @@ function App() {
         <Route path="/AdminSignIn" element={<AdminSignIn setKitchenUser={setKitchenUser} kitchenuser={kitchenuser}/>} />
         <Route path="/KitchenRegister" element={<KitchenRegister  kitchenuser={kitchenuser}/>} />
         <Route path="/MenuDashboard" element={<MenuDashboard  kitchenuser={kitchenuser}/>}/>
-       </Routes>
+        <Route path="/KitchenMenu/:id" element={<KitchenMenu cart={cart} setCart = {setCart} customer = {customer} kitchenselected={kitchenselected}/>} />
+        <Route path="/CustomerSignIn" element ={<CustomerSignIn setCustomer={setCustomer} customer={customer} cart={cart} setCart = {setCart}kitchenselected={kitchenselected}/>} />
+        <Route path="/ShoppingCart" element={<ShoppingCart customer = {customer}  cart={cart} setCart = {setCart} kitchenselected={kitchenselected}/>}  />   
+      </Routes>
     </>
   )
 }
