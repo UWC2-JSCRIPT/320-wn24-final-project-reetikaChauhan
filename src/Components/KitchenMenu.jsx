@@ -5,14 +5,13 @@ import db from '../db'
 import { useParams , useNavigate} from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import Footer from './footer';
-import Header from './header';
 
-const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
+
+const KitchenMenu = ({cart,setCart,customer,kitchenselectedimage,kitchenselectedname }) =>{
     const { id } = useParams();
     const navigate = useNavigate()
     const[kitchenmenu,setkitchenMenu] = useState([])
-   
+    
     useEffect(() => {
         const getMenuData = async () => {
                     try {
@@ -30,10 +29,15 @@ const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
         getMenuData()
         return () => onSnapshot;
     }, [id])
+   
     
     const handleshowcart = () =>{
-           navigate("/CustomerSignIn")
-          
+           if(!customer.uid){
+            navigate("/CustomerSignIn")
+           }
+           else{
+             navigate("ShoppingCart")
+           }   
     }
     return(
         <>
@@ -41,9 +45,9 @@ const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
             <>
                 <div className='kitchencontainer'>
                     <div className="kitchenimagediv">
-                       <img src={kitchenselected.kitchenimagelink}/>
+                       <img src={kitchenselectedimage}/>
                     </div>
-                    <h3>{kitchenselected.KithenName}</h3>
+                    <h3>{kitchenselectedname}</h3>
                     <div className="kitchenMenu">
                         <div className='heading'>
                             <div className='head-text'> 
@@ -83,7 +87,6 @@ const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
                 </div>
             </>
         }
-        <Footer/>
         </>
         
     )

@@ -1,12 +1,13 @@
 import '../App.css'
-import { collection, addDoc, orderBy, onSnapshot, query} from "firebase/firestore"; 
+import { collection,orderBy, onSnapshot, query} from "firebase/firestore"; 
 import db from '../db'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
-const KitchenDisplayonHomePage = ({setkitchenselected}) =>{
+import { Link,useNavigate } from 'react-router-dom';
+const KitchenDisplayonHomePage = ({setkitchenselectedname,setkitchenselectedimage,setkitchenselecteduid}) =>{
     const[kitchens, setkitchens] = useState([])
+    const navigate = useNavigate()
     const config = {
         apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
         authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -34,27 +35,29 @@ const KitchenDisplayonHomePage = ({setkitchenselected}) =>{
         getData()
         return () =>onSnapshot;
     }, [])
-   
+
+   const handleClick = (kitchen) =>{
+        setkitchenselectedimage(kitchen.data().kitchenimagelink)
+        setkitchenselectedname(kitchen.data().KithenName)
+        setkitchenselecteduid(kitchen.data().uid)
+        navigate(`/KitchenMenu/${kitchen.data().uid}`)
+   }
     return(
         <>
             <section class="image-gallery">
                { kitchens.map(kitchen =>{
-                    setkitchenselected(kitchen.data())
                     return(
-                        <div className="img-card" >
-                        <div className='image'>
-                            <img src={kitchen.data().kitchenimagelink} alt="image"/>  
-                            <div className='text'>
-                              <button> <h6>{kitchen.data().KithenName}</h6> </button>    
-                            </div> 
-                            <div className='reviews'>
-                                <span className="material-symbols-outlined">favorite</span>
+                        <div className="img-card" onClick={() => handleClick(kitchen)} >
+                            <div className='image'>
+                                <img src={kitchen.data().kitchenimagelink} alt="image"/>  
+                                <div className='text'>
+                                <button> <h6>{kitchen.data().KithenName}</h6> </button>    
+                                </div> 
+                                <div className='reviews'>
+                                    <span className="material-symbols-outlined">favorite</span>
+                                </div>
                             </div>
-                            <div className='showmenu'>
-                                <button className='menubutton' type="button" ><Link to={`/KitchenMenu/${kitchen.data().uid}`}>View</Link></button>
-                            </div>
-                        </div>
-                    </div>
+                       </div>
                     )   
              })
             }

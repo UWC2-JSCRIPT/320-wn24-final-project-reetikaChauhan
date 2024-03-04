@@ -1,5 +1,5 @@
 import '../App.css'
-import React, { useState,useEffect } from 'react';
+import React from 'react';
 import { useNavigate,Link } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -33,7 +33,7 @@ const SideBar = () =>{
                     <span><Link to={"/KitchenRegister"}>ADD TO MENU</Link></span>
                 </div>
                 <div className="step1">
-                    <span>PROFILE</span>
+                    <span><Link to={"/KitchenOrders"}>Orders</Link></span>
                 </div>
                 <div className="step1">
                     <span onClick={() =>{
