@@ -9,8 +9,6 @@ import { useNavigate,Link } from 'react-router-dom';
 import SideBar from './SideBarKitchenregister';
 
 const KitchenRegister = ({kitchenuser}) =>{
-    //const [kitchenuser, setKitchenUser] = useState({})
-    console.log("kitchenuser",kitchenuser)
     const [showregisterkitchen, setregisterKitchen] = useState('hide')
     const [showaddmenu, setAddmenu] = useState('hide')
     const [entry,setEntry] = useState({})
@@ -35,7 +33,6 @@ const KitchenRegister = ({kitchenuser}) =>{
             try {
                 const userRef = collection(db, 'registeredkitchenadmins');
                 const userQuery = query(userRef, where('uid', '==', kitchenuser.uid));
-                console.log('userquery',userQuery)
                 await getDocs(userQuery).then((querySnapshot) => {
                     if(!querySnapshot.empty){
                         querySnapshot.forEach((doc) => {
@@ -75,7 +72,6 @@ const KitchenRegister = ({kitchenuser}) =>{
     setregisterKitchen("hide")
     setAddmenu("")
     e.preventDefault();
-    console.log(entry)
     
     // Add a new document to registeredkitchenadmins.
     const docRef = await addDoc(collection(db, "registeredkitchenadmins"), {
@@ -89,7 +85,6 @@ const KitchenRegister = ({kitchenuser}) =>{
         createdAT: new Date()
       });
       setEntry('')
-      console.log("Document written with ID: ", docRef.id);
   }
   const handlenextStepTwo = async e =>{
     setregisterKitchen("hide")
@@ -189,8 +184,6 @@ if (hasError) {
                         </div>
                         
                     </div>
-                   
-
                 </div>
             </div>
         </div>       

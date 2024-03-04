@@ -5,8 +5,7 @@ import db from '../db'
 import { useParams , useNavigate} from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import Footer from './footer';
-import Header from './header';
+
 
 const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
     const { id } = useParams();
@@ -32,7 +31,13 @@ const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
     }, [id])
     
     const handleshowcart = () =>{
-           navigate("/CustomerSignIn")
+           if(!customer.uid){
+            navigate("/CustomerSignIn")
+           }
+           else{
+             navigate("ShoppingCart")
+           }
+           
           
     }
     return(
@@ -83,7 +88,6 @@ const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
                 </div>
             </>
         }
-        <Footer/>
         </>
         
     )

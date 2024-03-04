@@ -1,7 +1,5 @@
 import '../App.css'
-import React, { useState } from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase from 'firebase/compat/app';
+import React from 'react';
 import 'firebase/compat/auth';
 import {auth,provider} from "../config"
 import {signInWithPopup} from "firebase/auth";
@@ -13,8 +11,6 @@ const AdminSignIn = ({setKitchenUser,kitchenuser}) =>{
     })
    }
    
-
-
 
     return(
         <>{
