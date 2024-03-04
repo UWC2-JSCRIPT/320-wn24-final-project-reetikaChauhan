@@ -15,9 +15,6 @@ const KitchenRegister = ({kitchenuser}) =>{
     const [hasError, setHasError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     
-    const navigate = useNavigate()
-    const hide = 'hide'
-
     const config = {
         apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
         authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
