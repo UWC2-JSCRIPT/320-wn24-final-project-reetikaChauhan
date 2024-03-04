@@ -11,7 +11,6 @@ import Footer from "./footer";
 
 const CustomerOrderStatus = ({customer,orderPlaced}) =>{
     const [customerorderstatus,setcustomerorderstatus] = useState({})
-    console.log("customer",customer)
     const navigate = useNavigate()
    
     
@@ -27,12 +26,10 @@ const CustomerOrderStatus = ({customer,orderPlaced}) =>{
     const getData = async () => {
             try {
                 if(!customer.uid){
-                    console.log("nothing in customer")
                     navigate("/CustomerSignIn")
                 }
                 const userRef = collection(db, 'order');
                 const userQuery = query(userRef, where('customerinfo', '==', customer.email));
-                console.log('userquery',userQuery)
                 await getDocs(userQuery).then((querySnapshot) => {
                     if(!querySnapshot.empty){
                         querySnapshot.forEach((doc) => {
@@ -40,7 +37,6 @@ const CustomerOrderStatus = ({customer,orderPlaced}) =>{
                         });
                     }
                     else{
-                        console.log("order not placed")
                         navigate("/")
                     }
                 })    

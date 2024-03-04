@@ -22,11 +22,8 @@ const KitchenOrders = ({kitchenuser}) =>{
                     try {
                         const userRefMenu = collection(db, 'order');
                         const userQueryorder = query(userRefMenu, where('kitchenuid', '==', kitchenuser.uid));
-                        console.log("uq",userQueryorder)
                         onSnapshot(userQueryorder, snapshot => {
-                            console.log("Current data: ", snapshot.docs);
                             setorderItems(snapshot.docs)
-
                         });
                         
                 } catch (error) {

@@ -14,9 +14,6 @@ const KitchenRegister = ({kitchenuser}) =>{
     const [entry,setEntry] = useState({})
     const [hasError, setHasError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    
-    const navigate = useNavigate()
-    const hide = 'hide'
 
     const config = {
         apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -89,7 +86,6 @@ const KitchenRegister = ({kitchenuser}) =>{
     setregisterKitchen("hide")
     setAddmenu("")
     e.preventDefault();
-    console.log(entry)
     
     // Add a new document to Menu.
     const docRef = await addDoc(collection(db, "Menu"), {
