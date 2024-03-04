@@ -17,7 +17,6 @@ const KitchenMenu = ({cart,setCart,customer,kitchenselectedimage,kitchenselected
                     try {
                         const userRefMenu = collection(db, 'Menu');
                         const userQueryMenu = query(userRefMenu, where('uid', '==', id));
-                        console.log('userquerymenu', userQueryMenu)
                         onSnapshot(userQueryMenu, snapshot => {
                             console.log("Current data: ", snapshot.docs);
                             setkitchenMenu(snapshot.docs)

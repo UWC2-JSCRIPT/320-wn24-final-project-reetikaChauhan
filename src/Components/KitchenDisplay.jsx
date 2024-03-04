@@ -22,9 +22,7 @@ const KitchenDisplayonHomePage = ({setkitchenselectedname,setkitchenselectedimag
                 try {
                     const userRef = collection(db, 'registeredkitchenadmins');
                     const userQuery = query(userRef, orderBy("createdAT", 'desc'));
-                    console.log('userquery',userQuery)
                     onSnapshot(userQuery, snapshot => {
-                        console.log("Current data: ", snapshot.docs);
                         setkitchens(snapshot.docs)
                        
                     });      

@@ -9,8 +9,6 @@ import Footer from './footer';
 import Header from './header'
 
 const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,kitchenselectedname}) =>{
-    console.log("customer",customer)
-    console.log("cart",cart)
     const navigate = useNavigate()
     const [customeraddress,setcustomeraddress] = useState('')
     const [showsummary, setshowsummary] = useState('hide')
@@ -31,7 +29,6 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,k
             try {
                 const userRef = collection(db, 'order');
                 const userQuery = query(userRef, where('customerinfo', '==', customer.email));
-                console.log('userquery',userQuery)
                 await getDocs(userQuery).then((querySnapshot) => {
                     if(!querySnapshot.empty){
                        navigate("/CustomerOrderStatus")
