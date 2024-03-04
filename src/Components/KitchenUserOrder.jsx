@@ -1,6 +1,6 @@
 import '../App.css'
 import React, { useState,useEffect } from 'react';
-import { doc, getDocs, query,where,onSnapshot,collection, addDoc,setDoc } from "firebase/firestore";
+import { doc, getDocs, query,where,onSnapshot,collection, addDoc,setDoc,deleteDoc } from "firebase/firestore";
 import db from '../db'
 import 'firebase/firestore';
 import firebase from 'firebase/compat/app';
@@ -38,13 +38,13 @@ const KitchenOrders = ({kitchenuser}) =>{
         getMenuData()
         return () => onSnapshot;
     }, [kitchenuser.uid])
-    const handleStatus = async (uid) => {
+    const handleStatus = async (info) => {
         try {
             // Get a reference to the 'order' collection
             const orderCollectionRef = collection(db, 'order');
             
             // Query the collection to find the document with the specified UID
-            const querySnapshot = await getDocs(query(orderCollectionRef, where('kitchenuid', '==', uid)));
+            const querySnapshot = await getDocs(query(orderCollectionRef, where('customerinfo', '==', info)));
             
             // Check if there's exactly one document with the specified UID
             if (querySnapshot.size === 1) {
@@ -68,6 +68,28 @@ const KitchenOrders = ({kitchenuser}) =>{
             console.error('Error updating document:', error);
         }
     };
+    const handledeleteorder = async(info) =>{
+        try{
+            // Get a reference to the 'order' collection
+            const orderCollectionRef = collection(db, 'order');
+    
+            // Query the collection to find the document with the specified UID
+            const querySnapshot = await getDocs(query(orderCollectionRef, where('customerinfo', '==', info)));
+            
+            // Check if there's exactly one document with the specified UID
+            if (querySnapshot.size === 1) {
+                // Get the document ID of the matched document
+                const docId = querySnapshot.docs[0].id;
+                await deleteDoc(doc(db, "order", docId));
+                console.log('Document deleted successfully!');
+            } else {
+                console.log('No document found or multiple documents found with the specified UID.');
+            }
+        } catch (error) {
+            console.error('Error updating document:', error);
+        }
+        await deleteDoc(doc(db, "order"));
+    }
     
 
     return(
@@ -102,7 +124,8 @@ const KitchenOrders = ({kitchenuser}) =>{
                                                   )
                                             })}
                                             </td>
-                                            <td><button onClick={() =>handleStatus(menuItem.data().kitchenuid)}>Update</button></td>
+                                            <td><button onClick={() =>handleStatus(menuItem.data().customerinfo)}>Update</button></td>
+                                            <td><button onClick={() =>handledeleteorder(menuItem.data().customerinfo)}>Delete</button></td>
                                         </tr>
                                          
                                     )

@@ -5,7 +5,7 @@ import {auth,provider} from "../config"
 import {signInWithPopup} from "firebase/auth";
 import { useNavigate,Link } from 'react-router-dom';
 
-const CustomerSignIn = ({customer ,setCustomer,cart,kitchenselected,setCart}) =>{
+const CustomerSignIn = ({customer ,setCustomer,cart,setCart}) =>{
   const navigate = useNavigate()
    
   const handleClick = () =>{

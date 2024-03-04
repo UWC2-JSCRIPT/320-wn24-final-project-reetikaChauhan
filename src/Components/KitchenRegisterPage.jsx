@@ -15,7 +15,6 @@ const KitchenRegister = ({kitchenuser}) =>{
     const [hasError, setHasError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     
-   
     const navigate = useNavigate()
     const hide = 'hide'
 

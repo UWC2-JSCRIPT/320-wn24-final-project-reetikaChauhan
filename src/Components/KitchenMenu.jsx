@@ -7,11 +7,11 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
 
-const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
+const KitchenMenu = ({cart,setCart,customer,kitchenselectedimage,kitchenselectedname }) =>{
     const { id } = useParams();
     const navigate = useNavigate()
     const[kitchenmenu,setkitchenMenu] = useState([])
-   
+    
     useEffect(() => {
         const getMenuData = async () => {
                     try {
@@ -29,6 +29,7 @@ const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
         getMenuData()
         return () => onSnapshot;
     }, [id])
+   
     
     const handleshowcart = () =>{
            if(!customer.uid){
@@ -36,9 +37,7 @@ const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
            }
            else{
              navigate("ShoppingCart")
-           }
-           
-          
+           }   
     }
     return(
         <>
@@ -46,9 +45,9 @@ const KitchenMenu = ({cart,setCart,customer, kitchenselected}) =>{
             <>
                 <div className='kitchencontainer'>
                     <div className="kitchenimagediv">
-                       <img src={kitchenselected.kitchenimagelink}/>
+                       <img src={kitchenselectedimage}/>
                     </div>
-                    <h3>{kitchenselected.KithenName}</h3>
+                    <h3>{kitchenselectedname}</h3>
                     <div className="kitchenMenu">
                         <div className='heading'>
                             <div className='head-text'> 

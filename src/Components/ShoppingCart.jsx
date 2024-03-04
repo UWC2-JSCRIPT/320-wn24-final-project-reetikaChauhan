@@ -2,13 +2,15 @@ import '../App.css'
 import React, { useState,useEffect } from 'react';
 import { collection, query,where,onSnapshot,addDoc,getDocs} from "firebase/firestore"; 
 import db from '../db'
-import { useNavigate, Link} from 'react-router-dom';
+import { useParams , useNavigate, Link} from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import Footer from './footer';
 import Header from './header'
 
-const ShoppingCart = ({customer,cart,kitchenselected,setCart,setorderPlaced}) =>{
+const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,kitchenselectedname}) =>{
+    console.log("customer",customer)
+    console.log("cart",cart)
     const navigate = useNavigate()
     const [customeraddress,setcustomeraddress] = useState('')
     const [showsummary, setshowsummary] = useState('hide')
@@ -29,6 +31,7 @@ const ShoppingCart = ({customer,cart,kitchenselected,setCart,setorderPlaced}) =>
             try {
                 const userRef = collection(db, 'order');
                 const userQuery = query(userRef, where('customerinfo', '==', customer.email));
+                console.log('userquery',userQuery)
                 await getDocs(userQuery).then((querySnapshot) => {
                     if(!querySnapshot.empty){
                        navigate("/CustomerOrderStatus")
@@ -55,16 +58,19 @@ const ShoppingCart = ({customer,cart,kitchenselected,setCart,setorderPlaced}) =>
             console.log("newd",newData)
         }
         else{
+            console.log('i am working inside delete',index)
             if(cart.length === 1){
                 setCart([])
             }
             else if(index > 0){
             const arr1 = cart.slice(0,index)
             const arr2 = cart.slice(index+1)
+            console.log(arr1,arr2)
             setCart([...arr1,...arr2])
             }
             else{
             const arr2 = cart.slice(index + 1)
+            console.log('in else',arr2)
             setCart([...arr2])
             }
 
@@ -78,8 +84,8 @@ const ShoppingCart = ({customer,cart,kitchenselected,setCart,setorderPlaced}) =>
         {
             // Add a new document to Menu.
             const docRef = await addDoc(collection(db, "order"), {
-                kitchenuid:kitchenselected.uid,
-                kitchenName:kitchenselected.KithenName,
+                kitchenuid:kitchenselecteduid,
+                kitchenName:kitchenselectedname,
                 order:order,
                 customerinfo:customer.email,
                 orderStatus:"recieved",
@@ -96,12 +102,12 @@ const ShoppingCart = ({customer,cart,kitchenselected,setCart,setorderPlaced}) =>
         <h3>Shopping Cart</h3>
         <div className="kitchenMenu">
             <div className='tm-tab-content'>
-                <div className={`tm-list ${showsummary}`}>
+                <div className={`tm-list `}>
                     { cart.map((menuItem,index) =>{
                         totalprice = parseFloat(totalprice) + parseFloat(menuItem.price)
                         order.push(menuItem.item)
                         return(
-                            <div className='tm-list-item'>
+                            <div className={`tm-list-item ${showsummary}`}>
                                 <img src={menuItem.itemimagelink} alt="Image" class="tm-list-item-img"/>
                                 <div className="tm-black-bg tm-list-item-text">
                                     <h5 className='tm-list-item-name'>{menuItem.item} 
