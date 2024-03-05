@@ -284,7 +284,7 @@ button {  font-family: "Ubuntu", sans-serif;}
 }
 
 
-.container {  display: flex;  background-color: rgb(255, 255, 255);
+.container-admin {  display: flex;  background-color: rgb(255, 255, 255);
   margin-top: 3%;  margin-left: auto;  margin-right: auto;
   border-radius: 10px;
     box-shadow: 20px 20px 20px rgba(47, 18, 18, 0.101);

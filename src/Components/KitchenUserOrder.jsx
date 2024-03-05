@@ -93,7 +93,7 @@ const KitchenOrders = ({kitchenuser}) =>{
         <>
         {orderItems &&
             <>
-                <div className='container'>
+                <div className='container-admin'>
                     <SideBar/>
                     <div className="stepContainer" >
                         <div className="affichStep">

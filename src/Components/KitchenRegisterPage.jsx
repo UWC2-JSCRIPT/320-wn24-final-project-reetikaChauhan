@@ -111,7 +111,7 @@ if (hasError) {
 
     return(
         <>
-       <div className="container" >
+       <div className="container-admin" >
             <SideBar/>
             <div className="stepContainer" >
                 <div className="affichStep">

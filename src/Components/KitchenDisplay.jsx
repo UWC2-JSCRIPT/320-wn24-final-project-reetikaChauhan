@@ -44,24 +44,19 @@ const KitchenDisplayonHomePage = ({setkitchenselectedname,setkitchenselectedimag
    }
     return(
         <>
-            <section className="image-gallery">
+             <div class="row portfolio-container">
                { kitchens.map((kitchen,index) =>{
                     return(
-                        <div className="img-card" onClick={() => handleClick(kitchen)}  key={`KitchenDisplay-${index}`}>
-                            <div className='image'>
-                                <img src={kitchen.data().kitchenimagelink} alt="image"/>  
-                                <div className='text'>
-                                <button> <h6>{kitchen.data().KithenName}</h6> </button>    
-                                </div> 
-                                <div className='reviews'>
-                                    <span className="material-symbols-outlined">favorite</span>
-                                </div>
+                        <div className="col-lg-4 col-md-6 mb-4 portfolio-item first"  onClick={() => handleClick(kitchen)}  key={`KitchenDisplay-${index}`}>
+                            <div className="position-relative overflow-hidden mb-2">
+                                <h5>{kitchen.data().KithenName}</h5>
+                                <img className="img-fluid rounded w-100" src={kitchen.data().kitchenimagelink} alt=""/>
                             </div>
-                       </div>
+                        </div>
                     )   
              })
             }
-            </section>
+            </div>
         </>
     )
    
