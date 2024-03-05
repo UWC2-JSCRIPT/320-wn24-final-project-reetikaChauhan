@@ -21,7 +21,6 @@ function App() {
   const[kitchenselecteduid, setkitchenselecteduid] = useState("")
   const [orderPlaced, setorderPlaced] = useState(false)
   const navigate = useNavigate()
-  console.log('ksn',kitchenselectedname)
   
   return (
     <>

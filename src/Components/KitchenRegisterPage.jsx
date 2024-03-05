@@ -7,6 +7,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { useNavigate,Link } from 'react-router-dom';
 import SideBar from './SideBarKitchenregister';
+import PropTypes from "prop-types";
 
 const KitchenRegister = ({kitchenuser}) =>{
     const [showregisterkitchen, setregisterKitchen] = useState('hide')
@@ -142,8 +143,8 @@ if (hasError) {
                             name="kitchenimage" value={entry.kitchenimage || ''}  
                             onChange={(e) => handleChange(e)}
                         />
-                        <div class="buttonContainerStepOne">
-                            <button  onClick={handlenextStep} class="nextStep">Next Step</button>
+                        <div className="buttonContainerStepOne">
+                            <button  onClick={handlenextStep} className="nextStep">Next Step</button>
                         </div>
                     </div>
                     <div className={`stepInfo ${showaddmenu}`} >
@@ -174,8 +175,8 @@ if (hasError) {
                             name="wait" value={entry.wait|| ''} 
                             onChange={(e) => handleChange(e)}
                         />
-                        <div class="buttonContainerStepOne">
-                            <button  onClick={handlenextStepTwo} class="nextStep">Add Menu</button>
+                        <div className="buttonContainerStepOne">
+                            <button  onClick={handlenextStepTwo} className="nextStep">Add Menu</button>
                         </div>
                         
                     </div>
@@ -185,5 +186,13 @@ if (hasError) {
         </>
           )
 }
+
+KitchenRegister.propTypes = {
+    kitchenuser: PropTypes.shape({
+      displayName: PropTypes.string,
+      email: PropTypes.string,
+      uid: PropTypes.string,
+    }).isRequired,
+  };
 
 export default KitchenRegister;

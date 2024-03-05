@@ -5,6 +5,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { useState,useEffect } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
+import PropTypes from "prop-types";
+
 const KitchenDisplayonHomePage = ({setkitchenselectedname,setkitchenselectedimage,setkitchenselecteduid}) =>{
     const[kitchens, setkitchens] = useState([])
     const navigate = useNavigate()
@@ -42,10 +44,10 @@ const KitchenDisplayonHomePage = ({setkitchenselectedname,setkitchenselectedimag
    }
     return(
         <>
-            <section class="image-gallery">
-               { kitchens.map(kitchen =>{
+            <section className="image-gallery">
+               { kitchens.map((kitchen,index) =>{
                     return(
-                        <div className="img-card" onClick={() => handleClick(kitchen)} >
+                        <div className="img-card" onClick={() => handleClick(kitchen)}  key={`KitchenDisplay-${index}`}>
                             <div className='image'>
                                 <img src={kitchen.data().kitchenimagelink} alt="image"/>  
                                 <div className='text'>
@@ -64,5 +66,11 @@ const KitchenDisplayonHomePage = ({setkitchenselectedname,setkitchenselectedimag
     )
    
 }
+
+KitchenDisplayonHomePage.propTypes = {
+    setkitchenselectedname:PropTypes.func,
+    setkitchenselectedimage:PropTypes.func,
+    setkitchenselecteduid:PropTypes.func,
+  };
 
 export default KitchenDisplayonHomePage;

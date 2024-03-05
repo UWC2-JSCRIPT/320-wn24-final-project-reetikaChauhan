@@ -6,7 +6,7 @@ import db from '../db'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import SideBar from './SideBarKitchenregister';
-
+import PropTypes from "prop-types";
 
 const MenuDashboard = ({kitchenuser}) =>{
     const[menuItems,setMenuItems] = useState([])
@@ -48,18 +48,15 @@ const MenuDashboard = ({kitchenuser}) =>{
                                     </tr>
                                 </thead>
                                 <tbody>
-                                { menuItems.map(menuItem =>{
+                                { menuItems.map((menuItem,index) =>{
                                     return(
-                                        <tr>
+                                        <tr key={`MenuDashboard-${index}`} >
                                             <td> {menuItem.data().item}</td>
                                             <td>{menuItem.data().price}</td>
                                             <td>{menuItem.data().wait}</td>
-                                        </tr>
-                                         
+                                        </tr>   
                                     )
-                                
                                 })
-                                
                                 }
                                </tbody>
                          </table>
@@ -72,5 +69,13 @@ const MenuDashboard = ({kitchenuser}) =>{
         
     )
 }
+
+MenuDashboard.propTypes = {
+    kitchenuser: PropTypes.shape({
+      displayName: PropTypes.string,
+      email: PropTypes.string,
+      uid: PropTypes.string,
+    }).isRequired,
+  };
 
 export default MenuDashboard;
