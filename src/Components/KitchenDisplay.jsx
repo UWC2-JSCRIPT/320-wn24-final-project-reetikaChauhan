@@ -44,7 +44,7 @@ const KitchenDisplayonHomePage = ({setkitchenselectedname,setkitchenselectedimag
    }
     return(
         <>
-             <div class="row portfolio-container">
+             <div className="row portfolio-container">
                { kitchens.map((kitchen,index) =>{
                     return(
                         <div className="col-lg-4 col-md-6 mb-4 portfolio-item first"  onClick={() => handleClick(kitchen)}  key={`KitchenDisplay-${index}`}>
