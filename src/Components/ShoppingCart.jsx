@@ -7,6 +7,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import Footer from './footer';
 import Header from './header'
+import PropTypes from "prop-types";
 
 const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,kitchenselectedname}) =>{
     const navigate = useNavigate()
@@ -34,7 +35,6 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,k
                        navigate("/CustomerOrderStatus")
                     }
                     else{
-                        console.log("order not placed")
                         setshowsummary('')
                         setshowstatus('hide')
                     }
@@ -52,22 +52,18 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,k
     const handleDeleteItem = (index) =>{
         if(showstatus == ""){
             const newData = window.prompt('You want to update the order. Say yes or no')
-            console.log("newd",newData)
         }
         else{
-            console.log('i am working inside delete',index)
             if(cart.length === 1){
                 setCart([])
             }
             else if(index > 0){
             const arr1 = cart.slice(0,index)
             const arr2 = cart.slice(index+1)
-            console.log(arr1,arr2)
             setCart([...arr1,...arr2])
             }
             else{
             const arr2 = cart.slice(index + 1)
-            console.log('in else',arr2)
             setCart([...arr2])
             }
 
@@ -104,8 +100,8 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,k
                         totalprice = parseFloat(totalprice) + parseFloat(menuItem.price)
                         order.push(menuItem.item)
                         return(
-                            <div className={`tm-list-item ${showsummary}`}>
-                                <img src={menuItem.itemimagelink} alt="Image" class="tm-list-item-img"/>
+                            <div className={`tm-list-item ${showsummary}`} key={`ShoppingCart-${index}`}>
+                                <img src={menuItem.itemimagelink} alt="Image" className="tm-list-item-img"/>
                                 <div className="tm-black-bg tm-list-item-text">
                                     <h5 className='tm-list-item-name'>{menuItem.item} 
                                     <span  className="tm-list-item-price material-symbols-outlined" onClick={() => handleDeleteItem(index)}>
@@ -142,5 +138,24 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,k
    
     )
 }
+ShoppingCart.propTypes = {
+    setkitchenselectedname:PropTypes.func,
+    setkitchenselecteduid:PropTypes.func,
+    customer: PropTypes.shape({
+        displayName: PropTypes.string,
+        email: PropTypes.string,
+        uid: PropTypes.string,
+      }).isRequired,
+      cart:PropTypes.arrayOf(
+        PropTypes.shape({
+            item:PropTypes.string,
+            wait:PropTypes.string,
+            itemimagelink:PropTypes.string,
+            price:PropTypes.string
+        }),
+      ).isRequired,
+      setCart:PropTypes.func,
+      setorderPlaced:PropTypes.func
+  };
 
 export default ShoppingCart;

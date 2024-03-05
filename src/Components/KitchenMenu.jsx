@@ -5,7 +5,7 @@ import db from '../db'
 import { useParams , useNavigate} from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-
+import PropTypes from "prop-types";
 
 const KitchenMenu = ({cart,setCart,customer,kitchenselectedimage,kitchenselectedname }) =>{
     const { id } = useParams();
@@ -18,7 +18,6 @@ const KitchenMenu = ({cart,setCart,customer,kitchenselectedimage,kitchenselected
                         const userRefMenu = collection(db, 'Menu');
                         const userQueryMenu = query(userRefMenu, where('uid', '==', id));
                         onSnapshot(userQueryMenu, snapshot => {
-                            console.log("Current data: ", snapshot.docs);
                             setkitchenMenu(snapshot.docs)
                         });
                     } catch (error) {
@@ -62,16 +61,16 @@ const KitchenMenu = ({cart,setCart,customer,kitchenselectedimage,kitchenselected
                         <div className='tm-tab-content'>
                             <div className="tm-list">
                            
-                                { kitchenmenu.map(menuItem =>{
+                                { kitchenmenu.map((menuItem,index) =>{
                                     const handleAddToCart = (menuItem) =>{
                                         setCart(prevcart => [...prevcart,menuItem.data()]); 
                                     }
                                     return(
-                                        <div className='tm-list-item'>
-                                            <img src={menuItem.data().itemimagelink} alt="Image" class="tm-list-item-img"/>
+                                        <div className='tm-list-item' key={`KitchenMenu-${index}`}>
+                                            <img src={menuItem.data().itemimagelink} alt="Image" className="tm-list-item-img"/>
                                             <div className="tm-black-bg tm-list-item-text">
-                                                <h5 className='tm-list-item-name'>{menuItem.data().item} <span class="tm-list-item-price">${menuItem.data().price}</span></h5>
-                                                <p class="tm-list-item-description">Here is a wait timming for the first item. {menuItem.data().wait}.</p>
+                                                <h5 className='tm-list-item-name'>{menuItem.data().item} <span className="tm-list-item-price">${menuItem.data().price}</span></h5>
+                                                <p className="tm-list-item-description">Here is a wait timming for the first item. {menuItem.data().wait}.</p>
                                                 <p>{menuItem.data().wait}</p>
                                                 <button onClick={() => handleAddToCart(menuItem)}>+</button>
                                             </div>
@@ -91,4 +90,22 @@ const KitchenMenu = ({cart,setCart,customer,kitchenselectedimage,kitchenselected
     )
 }
 
+KitchenMenu.propTypes = {
+    setkitchenselectedname:PropTypes.func,
+    setkitchenselectedimage:PropTypes.func,
+    customer: PropTypes.shape({
+        displayName: PropTypes.string,
+        email: PropTypes.string,
+        uid: PropTypes.string,
+      }).isRequired,
+      cart:PropTypes.arrayOf(
+        PropTypes.shape({
+            item:PropTypes.string,
+            wait:PropTypes.string,
+            itemimagelink:PropTypes.string,
+            price:PropTypes.string
+        }),
+      ).isRequired,
+      setCart:PropTypes.func
+  };
 export default KitchenMenu;

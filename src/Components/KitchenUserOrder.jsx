@@ -6,7 +6,7 @@ import 'firebase/firestore';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import SideBar from './SideBarKitchenregister';
-
+import PropTypes from "prop-types";
 
 const KitchenOrders = ({kitchenuser}) =>{
     const[orderItems,setorderItems] = useState([])
@@ -111,7 +111,7 @@ const KitchenOrders = ({kitchenuser}) =>{
                                 <tbody>
                                 { orderItems.map((menuItem,index) =>{
                                     return(
-                                        <tr>
+                                        <tr key={`KitchenOrders-${index}`}>
                                             <td> {menuItem.data().customeraddress}</td>
                                             <td>{menuItem.data().customerinfo}</td>
                                             <td>{menuItem.data().orderStatus}</td>
@@ -141,5 +141,13 @@ const KitchenOrders = ({kitchenuser}) =>{
         
     )
 }
+
+KitchenOrders.propTypes = {
+    kitchenuser: PropTypes.shape({
+      displayName: PropTypes.string,
+      email: PropTypes.string,
+      uid: PropTypes.string,
+    }).isRequired,
+  };
 
 export default KitchenOrders;

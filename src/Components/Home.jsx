@@ -2,6 +2,8 @@ import '../App.css'
 import KitchenDisplayonHomePage from './KitchenDisplay';
 import Footer from './footer';
 import Header from './header';
+import PropTypes from "prop-types";
+
 function Home({setkitchenselectedname,setkitchenselectedimage,setkitchenselecteduid}) {
   
   return (
@@ -12,5 +14,11 @@ function Home({setkitchenselectedname,setkitchenselectedimage,setkitchenselected
     </>
   )
 }
+
+Home.propTypes = {
+  setkitchenselectedname:PropTypes.func,
+  setkitchenselectedimage:PropTypes.func,
+  setkitchenselecteduid:PropTypes.func,
+};
 
 export default Home

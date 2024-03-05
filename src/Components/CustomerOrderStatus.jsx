@@ -8,6 +8,7 @@ import 'firebase/compat/auth';
 import { useNavigate,Link } from 'react-router-dom';
 import Header from "./header";
 import Footer from "./footer";
+import PropTypes from "prop-types";
 
 const CustomerOrderStatus = ({customer,orderPlaced}) =>{
     const [customerorderstatus,setcustomerorderstatus] = useState({})
@@ -52,7 +53,7 @@ const CustomerOrderStatus = ({customer,orderPlaced}) =>{
 
     return (
         <>
-         <div class="status-container">
+         <div className="status-container">
             <Header/>
             <div className="center-block">
                 <button className="button"><h4>Order Status from {customerorderstatus.kitchenName} </h4></button>
@@ -64,5 +65,15 @@ const CustomerOrderStatus = ({customer,orderPlaced}) =>{
         </>
     ) 
 }
+
+
+CustomerOrderStatus.propTypes = {
+    orderPlaced: PropTypes.bool,
+    customer: PropTypes.shape({
+      displayName: PropTypes.string,
+      email: PropTypes.string,
+      uid: PropTypes.string,
+    }).isRequired,
+  };
 
 export default CustomerOrderStatus 
