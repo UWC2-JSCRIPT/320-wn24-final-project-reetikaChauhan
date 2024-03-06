@@ -11,7 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "firebase": "^10.8.1",
+    "firebase": "^9.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebaseui": "^6.0.0",
