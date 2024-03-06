@@ -40,7 +40,6 @@ function Home({setkitchenselectedname,setkitchenselectedimage,setkitchenselected
                       <div className="col-lg-7">
                           <h3 className="mb-4">Welcome to our Homemade Food Delivery App!</h3>
                           <p>Living away from home often means missing out on the comfort and nourishment of homemade meals. But fret not! Our Homemade Food Delivery App bridges the gap, connecting those craving homemade goodness with talented home cooks eager to share their culinary creations.</p>
-                          <a href="" className="btn btn-outline-primary mr-4">Hire Me</a>
                           <a href="" className="btn btn-outline-primary">Learn More</a>
                       </div>
                   </div>
