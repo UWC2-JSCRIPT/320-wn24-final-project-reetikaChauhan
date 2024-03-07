@@ -13,7 +13,7 @@ const KitchenRegister = ({kitchenuser}) =>{
     const [showregisterkitchen, setregisterKitchen] = useState('hide')
     const [showaddmenu, setAddmenu] = useState('hide')
     const [entry,setEntry] = useState({})
-    const [hasError, setHasError] = useState(false);
+    const [hasError, setHasError] = useState('hide');
     const [isLoading, setIsLoading] = useState(true);
 
     const config = {
@@ -57,37 +57,40 @@ const KitchenRegister = ({kitchenuser}) =>{
 
    
  
-  const handleChange = (e) => {
+    const handleChange = (e) => {
     const { name, value } = e.target;
-    setEntry(prevEntry => ({
-    ...prevEntry,
-    [name]: value
-  }));
-
-  }
-  const handlenextStep = async e =>{
-    setregisterKitchen("hide")
-    setAddmenu("")
+        setEntry(prevEntry => ({
+            ...prevEntry,
+            [name]: value
+            }))
+    }
+   const handlenextStep = async e =>{
     e.preventDefault();
-    
-    // Add a new document to registeredkitchenadmins.
-    const docRef = await addDoc(collection(db, "registeredkitchenadmins"), {
-        Address: entry.address,
-        Name:kitchenuser.displayName,
-        Email:kitchenuser.email,
-        Category:entry.category,
-        uid:kitchenuser.uid,
-        KithenName:entry.name,
-        kitchenimagelink:entry.kitchenimage,
-        createdAT: new Date()
-      });
-      setEntry('')
+    try{
+         // Add a new document to registeredkitchenadmins.
+        const docRef = await addDoc(collection(db, "registeredkitchenadmins"), {
+            Address: entry.address,
+            Name:kitchenuser.displayName,
+            Email:kitchenuser.email,
+            Category:entry.category,
+            uid:kitchenuser.uid,
+            KithenName:entry.name,
+            kitchenimagelink:entry.kitchenimage,
+            createdAT: new Date()
+          });
+          setEntry('')
+          setregisterKitchen("hide")
+          setAddmenu("")
+          setHasError("")
+    }
+    catch(error){
+        setHasError("")
+        console.error('Error fetching admins: ', error); 
+    }
   }
   const handlenextStepTwo = async e =>{
-    setregisterKitchen("hide")
-    setAddmenu("")
     e.preventDefault();
-    
+    try{
     // Add a new document to Menu.
     const docRef = await addDoc(collection(db, "Menu"), {
         uid:kitchenuser.uid,
@@ -97,15 +100,22 @@ const KitchenRegister = ({kitchenuser}) =>{
         itemimagelink:entry.imagelink
       });
       setEntry('')
+      setregisterKitchen("hide")
+      setAddmenu("")
+      setHasError("hide")
+    }
+    catch(error){
+        setHasError("")
+        console.error('Error fetching admins: ', error); 
+    }
+
   }
   
   if (isLoading) {
     return <h1>Loading...</h1>
-}
+  }
 
-if (hasError) {
-    return <p>Error!</p>
-}
+
 
    
 
@@ -115,6 +125,7 @@ if (hasError) {
             <SideBar/>
             <div className="stepContainer" >
                 <div className="affichStep">
+                <h6 className= {`${hasError}`}>Please fill all fields</h6>
                     <div className={`stepInfo ${showregisterkitchen}`} >
                         {kitchenuser &&
                         <><h3> Welcome {kitchenuser.displayName}</h3></>}
@@ -124,22 +135,22 @@ if (hasError) {
                             type="text"
                             name="name" value={entry.name || ''} 
                             onChange={(e) => handleChange(e)}
-                        />
+                         />
                         <p>Category (eg. Indian, Mexican, Filipino)</p>
                         <input
                             type="text"
                             name="category" value={entry.category || ''}  
                             onChange={(e) => handleChange(e)}
-                        />
+                      />
                         <p>Address </p>
                         <input
                             type="text"
                             name="address" value={entry.address || ''}  
                             onChange={(e) => handleChange(e)}
-                        />
+                         />
                         <p>Image of your kitchen link </p>
                          <input
-                            type="text"
+                            type="url"
                             name="kitchenimage" value={entry.kitchenimage || ''}  
                             onChange={(e) => handleChange(e)}
                         />
