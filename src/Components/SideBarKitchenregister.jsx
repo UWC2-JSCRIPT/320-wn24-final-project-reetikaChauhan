@@ -20,10 +20,13 @@ const SideBar = () =>{
   return(<>
         <div className="displayStep">
             <div className="circle">
-                <div className="circle1"><p>1</p></div>
-                <div className="circle2" ><p>2</p></div>
-                <div className="circle3" ><p>3</p></div>
-                <div className="circle4"><p>4</p></div>
+                <div className="circle1"><Link to={"/MenuDashboard"}><p>1</p></Link></div>
+                <div className="circle2" ><Link to={"/KitchenRegister"}><p>2</p></Link></div>
+                <div className="circle3" ><Link to={"/KitchenOrders"}><p>3</p></Link></div>
+                <div className="circle4"><span onClick={() =>{
+                firebase.auth().signOut();
+                navigate("/")
+            } }>4</span></div>
             </div>
             <div className="steps">
                 <div className="step1">

@@ -106,6 +106,7 @@ const KitchenOrders = ({kitchenuser}) =>{
                                     <th>Order Status</th>
                                     <th>Order details</th>
                                     <th>             </th>
+                                    <th>             </th>
                                     </tr>
                                 </thead>
                                 <tbody>
