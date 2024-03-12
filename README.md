@@ -50,7 +50,9 @@ The answers to the following questions Fill out each of these with a few sentenc
     * The other feature that I want to add is the spatial search feature( autocomplete address field) in the address input field in the shopping cart page. As it should be a proper address that actually exist if we think about the application practically. I have implemented that feature before using python Django. So have to figure out to implement in Reactjs or nodejs ( third course scope)
     * The tracking of delivery person who is on his way to deliver on a map. That would be the most challenging one for me. 
 
-    
+Documentation on how to run tests:
+On command line run: npm run test
+There is one test on component KitchenRegister. By using dummy kitchen register user object. It checks whether the screen shows loading... before it shows the forms or retrieves the data from firebase.
 
 Project requirements:
 
