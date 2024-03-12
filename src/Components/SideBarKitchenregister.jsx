@@ -1,5 +1,4 @@
 import '../App.css'
-import React from 'react';
 import { useNavigate,Link } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';

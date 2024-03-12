@@ -4,7 +4,7 @@ import db from '../db'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { useState,useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from "prop-types";
 
 const KitchenDisplayonHomePage = ({setkitchenselectedname,setkitchenselectedimage,setkitchenselecteduid}) =>{

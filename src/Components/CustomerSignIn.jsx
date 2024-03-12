@@ -1,12 +1,11 @@
 import '../App.css'
-import React, { useState } from 'react';
 import 'firebase/compat/auth';
 import {auth,provider} from "../config"
 import {signInWithPopup} from "firebase/auth";
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import PropTypes from "prop-types";
 
-const CustomerSignIn = ({customer ,setCustomer,cart,setCart}) =>{
+const CustomerSignIn = ({setCustomer}) =>{
   const navigate = useNavigate()
    
   const handleClick = () =>{
@@ -28,12 +27,5 @@ const CustomerSignIn = ({customer ,setCustomer,cart,setCart}) =>{
 }
 CustomerSignIn.propTypes = {
   setCustomer:PropTypes.func,
-  customer: PropTypes.shape({
-    displayName: PropTypes.string,
-    email: PropTypes.string,
-    uid: PropTypes.string,
-  }).isRequired,
-  cart:PropTypes.array,
-  setCart:PropTypes.func
 };
 export default CustomerSignIn;

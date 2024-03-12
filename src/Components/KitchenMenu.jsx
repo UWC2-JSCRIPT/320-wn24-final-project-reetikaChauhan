@@ -1,5 +1,5 @@
 import '../App.css'
-import React, { useState,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { collection, query,where,onSnapshot} from "firebase/firestore"; 
 import db from '../db'
 import { useParams , useNavigate} from 'react-router-dom';
@@ -93,18 +93,20 @@ const KitchenMenu = ({cart,setCart,customer,kitchenselectedimage,kitchenselected
 KitchenMenu.propTypes = {
     setkitchenselectedname:PropTypes.func,
     setkitchenselectedimage:PropTypes.func,
+    kitchenselectedimage:PropTypes.string,
+    kitchenselectedname:PropTypes.string,
     customer: PropTypes.shape({
         displayName: PropTypes.string,
         email: PropTypes.string,
         uid: PropTypes.string,
       }).isRequired,
-      cart:PropTypes.arrayOf(
-        PropTypes.shape({
-            item:PropTypes.string,
-            wait:PropTypes.string,
-            itemimagelink:PropTypes.string,
-            price:PropTypes.string
-        }),
+    cart:PropTypes.arrayOf(
+    PropTypes.shape({
+        item:PropTypes.string,
+        wait:PropTypes.string,
+        itemimagelink:PropTypes.string,
+        price:PropTypes.string
+    }),
       ).isRequired,
       setCart:PropTypes.func
   };

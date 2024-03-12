@@ -2,8 +2,8 @@ import './App.css';
 import Home from './Components/Home';
 import AdminSignIn from './Components/AdminSignIn';
 import KitchenRegister from './Components/KitchenRegisterPage';
-import React, { useState,useEffect } from 'react';
-import { Route, Routes,useNavigate } from 'react-router-dom';
+import  { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import 'firebase/compat/auth';
 import MenuDashboard from './Components/MenuDashboard';
 import KitchenMenu from './Components/KitchenMenu';
@@ -20,8 +20,7 @@ function App() {
   const[kitchenselectedimage, setkitchenselectedimage] = useState("")
   const[kitchenselecteduid, setkitchenselecteduid] = useState("")
   const [orderPlaced, setorderPlaced] = useState(false)
-  const navigate = useNavigate()
-  
+
   return (
     <>
       <Routes>
@@ -30,10 +29,10 @@ function App() {
         <Route path="/KitchenRegister" element={<KitchenRegister  kitchenuser={kitchenuser}/>} />
         <Route path="/MenuDashboard" element={<MenuDashboard  kitchenuser={kitchenuser}/>}/>
         <Route path="/KitchenMenu/:id" element={<KitchenMenu cart={cart} setCart = {setCart} customer = {customer} kitchenselectedname={kitchenselectedname} kitchenselectedimage={kitchenselectedimage} />} />
-        <Route path="/CustomerSignIn" element ={<CustomerSignIn setCustomer={setCustomer} customer={customer} cart={cart} setCart = {setCart} />} />
+        <Route path="/CustomerSignIn" element ={<CustomerSignIn setCustomer={setCustomer} />} />
         <Route path="/ShoppingCart" element={<ShoppingCart customer = {customer}  cart={cart} setCart = {setCart}  setorderPlaced={setorderPlaced} kitchenselecteduid={kitchenselecteduid} kitchenselectedname={kitchenselectedname}/>}  /> 
         <Route path="/KitchenOrders" element={<KitchenOrders kitchenuser={kitchenuser}/>}  />  
-        <Route path="/CustomerOrderStatus" element={<CustomerOrderStatus customer = {customer} orderPlaced={orderPlaced}/>}  /> 
+        <Route path="/CustomerOrderStatus" element={<CustomerOrderStatus customer = {customer}/>}  /> 
       </Routes>
     </>
   )

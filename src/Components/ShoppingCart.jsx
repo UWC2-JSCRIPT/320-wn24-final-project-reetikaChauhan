@@ -1,8 +1,8 @@
 import '../App.css'
-import React, { useState,useEffect } from 'react';
-import { collection, query,where,onSnapshot,addDoc,getDocs} from "firebase/firestore"; 
+import { useState,useEffect } from 'react';
+import { collection, query,where,addDoc,getDocs} from "firebase/firestore"; 
 import db from '../db'
-import { useParams , useNavigate, Link} from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import Footer from './footer';
@@ -141,21 +141,23 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,k
 ShoppingCart.propTypes = {
     setkitchenselectedname:PropTypes.func,
     setkitchenselecteduid:PropTypes.func,
+    kitchenselecteduid:PropTypes.string,
+    kitchenselectedname:PropTypes.string,
     customer: PropTypes.shape({
         displayName: PropTypes.string,
         email: PropTypes.string,
         uid: PropTypes.string,
       }).isRequired,
-      cart:PropTypes.arrayOf(
-        PropTypes.shape({
-            item:PropTypes.string,
-            wait:PropTypes.string,
-            itemimagelink:PropTypes.string,
-            price:PropTypes.string
-        }),
-      ).isRequired,
-      setCart:PropTypes.func,
-      setorderPlaced:PropTypes.func
+    cart:PropTypes.arrayOf(
+    PropTypes.shape({
+        item:PropTypes.string,
+        wait:PropTypes.string,
+        itemimagelink:PropTypes.string,
+        price:PropTypes.string
+    }),
+    ).isRequired,
+    setCart:PropTypes.func,
+    setorderPlaced:PropTypes.func
   };
 
 export default ShoppingCart;

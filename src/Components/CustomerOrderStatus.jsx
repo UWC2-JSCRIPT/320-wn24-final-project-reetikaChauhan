@@ -1,19 +1,18 @@
 import "../App.css"
-import React, { useState,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { collection } from "firebase/firestore"; 
 import {  getDocs, query,where } from "firebase/firestore";
 import db from '../db'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import Header from "./header";
 import Footer from "./footer";
 import PropTypes from "prop-types";
 
-const CustomerOrderStatus = ({customer,orderPlaced}) =>{
+const CustomerOrderStatus = ({customer}) =>{
     const [customerorderstatus,setcustomerorderstatus] = useState({})
     const navigate = useNavigate()
-   
     
     const config = {
         apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -68,7 +67,6 @@ const CustomerOrderStatus = ({customer,orderPlaced}) =>{
 
 
 CustomerOrderStatus.propTypes = {
-    orderPlaced: PropTypes.bool,
     customer: PropTypes.shape({
       displayName: PropTypes.string,
       email: PropTypes.string,

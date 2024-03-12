@@ -1,6 +1,6 @@
 import '../App.css'
-import React, { useState,useEffect } from 'react';
-import { doc, getDocs, query,where,onSnapshot,collection, addDoc,setDoc,deleteDoc } from "firebase/firestore";
+import { useState,useEffect } from 'react';
+import { doc, getDocs, query,where,onSnapshot,collection,setDoc,deleteDoc } from "firebase/firestore";
 import db from '../db'
 import 'firebase/firestore';
 import firebase from 'firebase/compat/app';

@@ -1,11 +1,10 @@
 import '../App.css'
-import React, { useState,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { collection, addDoc } from "firebase/firestore"; 
-import { doc, getDocs, query,where } from "firebase/firestore";
+import { getDocs, query,where } from "firebase/firestore";
 import db from '../db'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { useNavigate,Link } from 'react-router-dom';
 import SideBar from './SideBarKitchenregister';
 import PropTypes from "prop-types";
 

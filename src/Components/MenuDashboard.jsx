@@ -1,7 +1,7 @@
 import '../App.css'
-import React, { useState,useEffect } from 'react';
-import { collection, addDoc } from "firebase/firestore"; 
-import { doc, getDocs, query,where,onSnapshot } from "firebase/firestore";
+import { useState,useEffect } from 'react';
+import { collection} from "firebase/firestore"; 
+import { query,where,onSnapshot } from "firebase/firestore";
 import db from '../db'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
