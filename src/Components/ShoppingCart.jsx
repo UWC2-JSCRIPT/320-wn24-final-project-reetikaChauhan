@@ -8,13 +8,15 @@ import 'firebase/compat/auth';
 import Footer from './footer';
 import Header from './header'
 import PropTypes from "prop-types";
+import axios from 'axios';
 
 const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,kitchenselectedname}) =>{
     const navigate = useNavigate()
     const [customeraddress,setcustomeraddress] = useState('')
     const [showsummary, setshowsummary] = useState('hide')
     const [showstatus, setshowstatus] = useState('hide')
-    
+    const [apiquery, setQuery] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
     const order = []
     let  totalprice = 2.99 + 7.46
     const config = {
@@ -41,9 +43,7 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,k
                 })    
                 
         } catch (error) {
-            console.error('Error fetching admins: ', error);
-            
-            
+            console.error('Error fetching admins: ', error);    
         }  
     }
     getData()
@@ -69,10 +69,28 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,k
 
         }
     
-      }
-    const handleAddress = (e) =>{
-        setcustomeraddress(e.target.value)
     }
+
+    const handleAddress = async(e) =>{
+        const value = e.target.value;
+        setQuery(value);
+        try {
+        const response = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${value}`);
+        setSuggestions(response.data);
+        } catch (error) {
+        console.error('Error fetching address suggestions:', error);
+        }
+        //setcustomeraddress(e.target.value)
+    }
+
+    const handleSelectAddress = (address) => {
+        console.log(address)
+        setQuery(address.display_name);
+        setSuggestions([]);
+        setcustomeraddress(address.display_name)
+        // Do something with the selected address, like storing it in state
+    };
+    
     const handleOrderSubmission = async() =>{
         {
             // Add a new document to Menu.
@@ -119,7 +137,14 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,k
                     <div className={`booking ${showsummary}`}>
                         <h4>Total of your order</h4>
                         <p>Please enter your delivery address</p>
-                        <input type="text" onChange={(e) => handleAddress(e)}/>
+                        <input type="text" value={apiquery}  onChange={(e) => handleAddress(e)}/>
+                        <ul>
+                            {suggestions.map((address) => (
+                            <li key={address.place_id} onClick={() => handleSelectAddress(address)}>
+                                {address.display_name}
+                            </li>
+                            ))}
+                        </ul>
                         <p>Delivery Fee:              $2.99 </p>
                         <p>Fees and Estimated Tax:    $7.46</p>
                         <p>Total :                    ${totalprice}</p>
