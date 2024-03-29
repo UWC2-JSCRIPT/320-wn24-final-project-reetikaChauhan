@@ -9,23 +9,26 @@ import Footer from './footer';
 import Header from './header'
 import PropTypes from "prop-types";
 import axios from 'axios';
+import { useContext } from 'react';
+import UserContext from '../usercontext';
 
-const ShoppingCart = ({customer,cart,setCart,setorderPlaced,kitchenselecteduid,kitchenselectedname}) =>{
+const ShoppingCart = ({customer,cart,setCart,setorderPlaced}) =>{
     const navigate = useNavigate()
     const [customeraddress,setcustomeraddress] = useState('')
     const [showsummary, setshowsummary] = useState('hide')
     const [showstatus, setshowstatus] = useState('hide')
     const [apiquery, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
+    const {kitchenselecteduid,kitchenselectedname} = useContext(UserContext)
     const order = []
     let  totalprice = 2.99 + 7.46
-    const config = {
-        apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-        authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-        projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-        // ...
-    };
-    firebase.initializeApp(config);
+    // const config = {
+    //     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    //     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    //     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    //     // ...
+    // };
+    // firebase.initializeApp(config);
     useEffect(() => {
     const getData = async () => {
     

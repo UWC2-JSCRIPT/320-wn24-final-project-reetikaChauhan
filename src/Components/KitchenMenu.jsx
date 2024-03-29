@@ -6,12 +6,14 @@ import { useParams , useNavigate} from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import PropTypes from "prop-types";
+import { useContext } from 'react';
+import UserContext from '../usercontext';
 
-const KitchenMenu = ({cart,setCart,customer,kitchenselectedimage,kitchenselectedname }) =>{
+const KitchenMenu = ({cart,setCart,customer }) =>{
     const { id } = useParams();
     const navigate = useNavigate()
     const[kitchenmenu,setkitchenMenu] = useState([])
-    
+    const {kitchenselectedimage,kitchenselectedname} = useContext(UserContext)
     useEffect(() => {
         const getMenuData = async () => {
                     try {

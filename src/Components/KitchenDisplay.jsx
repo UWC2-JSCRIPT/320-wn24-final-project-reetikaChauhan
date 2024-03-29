@@ -6,18 +6,21 @@ import 'firebase/compat/auth';
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from "prop-types";
+import { useContext } from 'react';
+import UserContext from '../usercontext';
 
-const KitchenDisplayonHomePage = ({setkitchenselectedname,setkitchenselectedimage,setkitchenselecteduid}) =>{
+const KitchenDisplayonHomePage = () =>{
     const[kitchens, setkitchens] = useState([])
     const navigate = useNavigate()
-    const config = {
-        apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-        authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-        projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-        // ...
-    };
+    const {setkitchenselectedname,setkitchenselectedimage,setkitchenselecteduid} = useContext(UserContext)
+    // const config = {
+    //     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    //     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    //     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    //     // ...
+    // };
 
-    firebase.initializeApp(config);
+   // firebase.initializeApp(config);
 
     useEffect(() => {
         const getData = async () => {

@@ -15,13 +15,13 @@ const KitchenRegister = ({kitchenuser}) =>{
     const [hasError, setHasError] = useState('hide');
     const [isLoading, setIsLoading] = useState(true);
 
-    const config = {
-        apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-        authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-        projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-        // ...
-    };
-    firebase.initializeApp(config);
+    // const config = {
+    //     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    //     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    //     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    //     // ...
+    // };
+    // firebase.initializeApp(config);
 
     useEffect(() => {
     const getData = async () => {

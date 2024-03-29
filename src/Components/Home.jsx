@@ -50,7 +50,7 @@ function Home({setkitchenselectedname,setkitchenselectedimage,setkitchenselected
                     <h1 className="display-1 text-uppercase text-white" style={myStyles}>Kitchens</h1>
                     <h1 className="position-absolute text-uppercase text-primary">Kitchens</h1>
                 </div>
-                <KitchenDisplayonHomePage setkitchenselectedname={setkitchenselectedname} setkitchenselectedimage={setkitchenselectedimage} setkitchenselecteduid={setkitchenselecteduid}/>
+                <KitchenDisplayonHomePage />
             </div>
           </div>
         <Footer/>

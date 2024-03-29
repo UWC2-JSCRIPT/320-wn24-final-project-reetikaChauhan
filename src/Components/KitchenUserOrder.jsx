@@ -10,13 +10,13 @@ import PropTypes from "prop-types";
 
 const KitchenOrders = ({kitchenuser}) =>{
     const[orderItems,setorderItems] = useState([])
-    const config = {
-        apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-        authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-        projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-        // ...
-    };
-    firebase.initializeApp(config);
+    // const config = {
+    //     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    //     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    //     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    //     // ...
+    // };
+    // firebase.initializeApp(config);
     useEffect(() => {
         const getMenuData = async () => {
                     try {

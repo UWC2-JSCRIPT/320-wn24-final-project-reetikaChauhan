@@ -59,7 +59,7 @@ section {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #6c757d;
+  color: #6c757d !important;
   text-align: left;
   background-color: #ffffff;
 }

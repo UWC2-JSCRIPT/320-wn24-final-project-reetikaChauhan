@@ -4,13 +4,16 @@ import {auth,provider} from "../config"
 import {signInWithPopup} from "firebase/auth";
 import { useNavigate} from 'react-router-dom';
 import PropTypes from "prop-types";
+import { useContext } from 'react';
+import UserContext from '../usercontext';
 
 const CustomerSignIn = ({setCustomer}) =>{
   const navigate = useNavigate()
-   
+  const {user, setUser} = useContext(UserContext)
   const handleClick = () =>{
   signInWithPopup(auth,provider).then((data) =>{
     setCustomer(data.user)
+    setUser(data.user)
     navigate("/ShoppingCart")
   })
   }
