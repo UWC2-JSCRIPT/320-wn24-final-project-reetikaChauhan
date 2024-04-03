@@ -61,7 +61,7 @@ const CustomerOrderStatus = () =>{
 
     return (
         <>
-         <div className="App">
+         <div>
             <Header/>
             <div className="center-block">
                 <button className="button"><h4>Order Status from {customerorderstatus.kitchenName} </h4></button>
