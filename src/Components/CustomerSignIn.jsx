@@ -18,17 +18,18 @@ const CustomerSignIn = ({setCustomer}) =>{
   })
   }
   
-    return(
-        <>
-          <div className="container" >
-            <h3>Please Sign In to check out</h3>
-            <button onClick={handleClick}>google</button>
-          </div>   
-         
-        </>
-          )
+  return(
+      <>
+        <div className="container" >
+          <h3>Please Sign In to check out</h3>
+          <button onClick={handleClick}>google</button>
+        </div>   
+        
+      </>
+        )
 }
 CustomerSignIn.propTypes = {
   setCustomer:PropTypes.func,
 };
+
 export default CustomerSignIn;

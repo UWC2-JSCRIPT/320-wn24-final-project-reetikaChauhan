@@ -12,6 +12,7 @@ import ShoppingCart from './Components/ShoppingCart';
 import KitchenOrders from './Components/KitchenUserOrder';
 import CustomerOrderStatus from "./Components/CustomerOrderStatus";
 import { UserProvider } from './usercontext';
+import ChatroomClient from './Components/Chatroom'
 
 function App() {
   const [kitchenuser, setKitchenUser] = useState({})
@@ -27,11 +28,12 @@ function App() {
         <Route path="/AdminSignIn" element={<AdminSignIn setKitchenUser={setKitchenUser} kitchenuser={kitchenuser}/>} />
         <Route path="/KitchenRegister" element={<KitchenRegister  kitchenuser={kitchenuser}/>} />
         <Route path="/MenuDashboard" element={<MenuDashboard  kitchenuser={kitchenuser}/>}/>
-        <Route path="/KitchenMenu/:id" element={<KitchenMenu cart={cart} setCart = {setCart} customer = {customer}  />} />
+        <Route path="/KitchenMenu/:id" element={<KitchenMenu cart={cart} setCart = {setCart}   />} />
         <Route path="/CustomerSignIn" element ={<CustomerSignIn setCustomer={setCustomer} />} />
-        <Route path="/ShoppingCart" element={<ShoppingCart customer = {customer}  cart={cart} setCart = {setCart}  setorderPlaced={setorderPlaced} />}  /> 
+        <Route path="/ShoppingCart" element={<ShoppingCart  cart={cart} setCart = {setCart}  setorderPlaced={setorderPlaced} />}  /> 
         <Route path="/KitchenOrders" element={<KitchenOrders kitchenuser={kitchenuser}/>}  />  
         <Route path="/CustomerOrderStatus" element={<CustomerOrderStatus customer = {customer}/>}  /> 
+        <Route path="/Chatroom" element={<ChatroomClient/>}  /> 
       </Routes>
     </UserProvider>
     </>

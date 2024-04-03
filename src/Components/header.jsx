@@ -1,8 +1,10 @@
 import React from 'react';
+
 const Header = () =>{
     const myStyles = {
         WebkitTextStroke: '1px #dee2e6'
-      };
+    };
+
     return(
         <>
         <section data-spy="scroll" data-target=".navbar" data-offset="51">
@@ -17,8 +19,7 @@ const Header = () =>{
                     <div className="navbar-nav m-auto py-0">
                         <a href="/" className="nav-item nav-link active">Home</a>
                         <a href="/AdminSignIn" className="nav-item nav-link">Kitchen Register</a>
-                        <a href="//CustomerOrderStatus" className="nav-item nav-link">Order</a>
-                        <a href="#" className="nav-item nav-link">Contact</a>
+                        <a href="/CustomerOrderStatus" className="nav-item nav-link">Order</a>
                     </div> 
                 </div>
             </nav>
@@ -35,7 +36,6 @@ const Header = () =>{
                         <div className="col-lg-7">
                             <h3 className="mb-4">Welcome to our Homemade Food Delivery App!</h3>
                             <p>Living away from home often means missing out on the comfort and nourishment of homemade meals. But fret not! Our Homemade Food Delivery App bridges the gap, connecting those craving homemade goodness with talented home cooks eager to share their culinary creations.</p>
-                            <a href="" className="btn btn-outline-primary mr-4">Hire Me</a>
                             <a href="" className="btn btn-outline-primary">Learn More</a>
                         </div>
                     </div>

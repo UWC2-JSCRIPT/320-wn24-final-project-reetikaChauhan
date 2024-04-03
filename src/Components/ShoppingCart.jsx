@@ -12,29 +12,23 @@ import axios from 'axios';
 import { useContext } from 'react';
 import UserContext from '../usercontext';
 
-const ShoppingCart = ({customer,cart,setCart,setorderPlaced}) =>{
+const ShoppingCart = ({cart,setCart,setorderPlaced}) =>{
     const navigate = useNavigate()
     const [customeraddress,setcustomeraddress] = useState('')
     const [showsummary, setshowsummary] = useState('hide')
     const [showstatus, setshowstatus] = useState('hide')
     const [apiquery, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
-    const {kitchenselecteduid,kitchenselectedname} = useContext(UserContext)
+    const {user,kitchenselecteduid,kitchenselectedname} = useContext(UserContext)
     const order = []
     let  totalprice = 2.99 + 7.46
-    // const config = {
-    //     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    //     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    //     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    //     // ...
-    // };
-    // firebase.initializeApp(config);
+    
     useEffect(() => {
     const getData = async () => {
     
             try {
                 const userRef = collection(db, 'order');
-                const userQuery = query(userRef, where('customerinfo', '==', customer.email));
+                const userQuery = query(userRef, where('customerinfo', '==', user.email));
                 await getDocs(userQuery).then((querySnapshot) => {
                     if(!querySnapshot.empty){
                        navigate("/CustomerOrderStatus")
@@ -101,7 +95,7 @@ const ShoppingCart = ({customer,cart,setCart,setorderPlaced}) =>{
                 kitchenuid:kitchenselecteduid,
                 kitchenName:kitchenselectedname,
                 order:order,
-                customerinfo:customer.email,
+                customerinfo:user.email,
                 orderStatus:"recieved",
                 customeraddress:customeraddress
               });
@@ -171,11 +165,6 @@ ShoppingCart.propTypes = {
     setkitchenselecteduid:PropTypes.func,
     kitchenselecteduid:PropTypes.string,
     kitchenselectedname:PropTypes.string,
-    customer: PropTypes.shape({
-        displayName: PropTypes.string,
-        email: PropTypes.string,
-        uid: PropTypes.string,
-      }).isRequired,
     cart:PropTypes.arrayOf(
     PropTypes.shape({
         item:PropTypes.string,

@@ -9,11 +9,11 @@ import PropTypes from "prop-types";
 import { useContext } from 'react';
 import UserContext from '../usercontext';
 
-const KitchenMenu = ({cart,setCart,customer }) =>{
+const KitchenMenu = ({ cart,setCart }) =>{
     const { id } = useParams();
     const navigate = useNavigate()
     const[kitchenmenu,setkitchenMenu] = useState([])
-    const {kitchenselectedimage,kitchenselectedname} = useContext(UserContext)
+    const {user,kitchenselectedimage,kitchenselectedname} = useContext(UserContext)
     useEffect(() => {
         const getMenuData = async () => {
                     try {
@@ -32,7 +32,7 @@ const KitchenMenu = ({cart,setCart,customer }) =>{
    
     
     const handleshowcart = () =>{
-           if(!customer.uid){
+           if(!user.uid){
             navigate("/CustomerSignIn")
            }
            else{
@@ -97,11 +97,6 @@ KitchenMenu.propTypes = {
     setkitchenselectedimage:PropTypes.func,
     kitchenselectedimage:PropTypes.string,
     kitchenselectedname:PropTypes.string,
-    customer: PropTypes.shape({
-        displayName: PropTypes.string,
-        email: PropTypes.string,
-        uid: PropTypes.string,
-      }).isRequired,
     cart:PropTypes.arrayOf(
     PropTypes.shape({
         item:PropTypes.string,

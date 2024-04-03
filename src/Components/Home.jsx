@@ -2,11 +2,15 @@ import '../App.css'
 import KitchenDisplayonHomePage from './KitchenDisplay';
 import Footer from './footer';
 import PropTypes from "prop-types";
+import { useNavigate, Link } from 'react-router-dom';
 
-function Home({setkitchenselectedname,setkitchenselectedimage,setkitchenselecteduid}) {
+function Home() {
   const myStyles = {
     WebkitTextStroke: '1px #dee2e6'
   };
+ 
+  const navigate = useNavigate()
+  
   return (
     <>
       <section data-spy="scroll" data-target=".navbar" data-offset="51">
@@ -22,7 +26,6 @@ function Home({setkitchenselectedname,setkitchenselectedimage,setkitchenselected
                     <a href="/" className="nav-item nav-link active">Home</a>
                     <a href="/AdminSignIn" className="nav-item nav-link">Kitchen Register</a>
                     <a href="/CustomerOrderStatus" className="nav-item nav-link">Order</a>
-                    <a href="#" className="nav-item nav-link">Contact</a>
                 </div> 
             </div>
           </nav>
@@ -59,10 +62,6 @@ function Home({setkitchenselectedname,setkitchenselectedimage,setkitchenselected
   )
 }
 
-Home.propTypes = {
-  setkitchenselectedname:PropTypes.func,
-  setkitchenselectedimage:PropTypes.func,
-  setkitchenselecteduid:PropTypes.func,
-};
+
 
 export default Home
